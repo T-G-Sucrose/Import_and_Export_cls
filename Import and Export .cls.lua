@@ -33,6 +33,9 @@ local function read_cls(path)
         print("アクティブなスプライトがないぜ！")
         return
     end
+    if path == "" then
+        return
+    end
 
     local file_in = io.open(path,"rb")  -- ファイル読み込み
     if file_in == nil then
@@ -132,6 +135,9 @@ end
 local function save_cls(path)
     if app.sprite == nil then
         print("アクティブなスプライトがないぜ！")
+        return
+    end
+    if path == "" then
         return
     end
 
