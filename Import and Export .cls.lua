@@ -125,6 +125,12 @@ local function read_cls(path)
     end
 
     app.sprite:setPalette(pal)
+    local dlg_result = Dialog()
+    dlg_result:label{
+        label = "File loaded: " .. path
+    }
+    dlg_result:show()
+
 end
 
 -- エクスポート
@@ -181,6 +187,12 @@ local function save_cls(path)
 
     file_out:write(data)                -- ファイルに出力
     io.close(file_out)
+
+    local dlg_result = Dialog()
+    dlg_result:label{
+        label = "File saved: " .. path
+    }
+    dlg_result:show()
 end
 
 -- ダイアログ
@@ -210,12 +222,7 @@ dlg:button{
 }
 dlg:show()
 
-local dlg_result = Dialog()
-dlg_result:label{
-    label = dlg.data.file_i
-}
 if dlg.data.ok then
-    --dlg_result:show()
     save_cls(dlg.data.file_o)
     read_cls(dlg.data.file_i)
 end
