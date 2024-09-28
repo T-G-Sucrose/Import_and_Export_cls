@@ -29,10 +29,6 @@ local HEADER = "53 4c 43 43 00 01"   -- ヘッダ文字列
 
 -- インポート
 local function read_cls(path)
-    if app.sprite == nil then
-        print("アクティブなスプライトがないぜ！")
-        return
-    end
     if path == "" then
         return
     end
@@ -53,7 +49,7 @@ local function read_cls(path)
         ptr = ptr + 1
     end
     if header_chk ~= hex_to_bin(HEADER) then
-        print("ヘッダ情報が不正だぜ!")
+        error("ヘッダ情報が不正だぜ!")
         return
     end
 
@@ -74,7 +70,7 @@ local function read_cls(path)
         ptr = ptr + 1
     end
     if cls_name_chk ~= hex_to_bin("04 00 00 00") then
-        print("カラーセット名が不正だぜ!")
+        error("カラーセット名が不正だぜ!")
         return
     end
 
@@ -113,7 +109,7 @@ local function read_cls(path)
             ptr = ptr + 1
         end
         if color_dat_chk ~= hex_to_bin("00 00 00 00") and color_dat_chk ~= hex_to_bin("01 00 00 00") then
-            print("色情報が不正だぜ!")
+            error("色情報が不正だぜ!")
             return
         end
 
@@ -133,10 +129,6 @@ end
 
 -- エクスポート
 local function save_cls(path)
-    if app.sprite == nil then
-        print("アクティブなスプライトがないぜ！")
-        return
-    end
     if path == "" then
         return
     end
@@ -192,6 +184,10 @@ local function save_cls(path)
 end
 
 -- ダイアログ
+if app.sprite == nil then
+    error("アクティブなスプライトがないぜ！")
+    return
+end
 
 local dlg = Dialog()
 dlg:file {
