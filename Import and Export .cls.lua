@@ -220,6 +220,6 @@ dlg_result:label{
 }
 if dlg.data.ok then
     --dlg_result:show()
-    read_cls(dlg.data.file_i)
     save_cls(dlg.data.file_o)
+    read_cls(dlg.data.file_i)
 end
